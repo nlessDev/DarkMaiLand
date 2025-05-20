@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}{{ email.subject }} - SMTPX{% endblock %}
+
+{% block content %}
+<div class="email-view">
+    <div class="email-header">
+        <h2>{{ email.subject }}</h2>
+        <div class="email-meta">
+            <div class="meta-item">
+                <span class="meta-label">From:</span>
+                <span class="meta-value">{{ email.sender }}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">To:</span>
+                <span class="meta-value">{{ email.recipients|join(', ') }}</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Date:</span>
+                <span class="meta-value">{{ email.timestamp|datetimeformat }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="email-body">
+        <pre>{{ email.content }}</pre>
+    </div>
+
+    {% if email.attachments %}
+    <div class="email-attachments">
+        <h3>Attachments</h3>
+        <ul>
+            {% for attachment in email.attachments %}
+            <li>
+                <a href="{{ url_for('web.download_attachment', email_id=email.message_id, attachment_id=attachment.id) }}">
+                    {{ attachment.filename }}
+                </a>
+                <span class="file-size">({{ attachment.content|length|filesizeformat }})</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

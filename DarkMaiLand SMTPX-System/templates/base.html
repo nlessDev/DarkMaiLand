@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SMTPX Secure Email{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav class="main-nav">
+        <h1><a href="{{ url_for('web.inbox') }}">SMTPX Mail</a></h1>
+        <div class="nav-links">
+            <a href="{{ url_for('web.inbox') }}">Inbox</a>
+            <a href="{{ url_for('web.compose') }}">Compose</a>
+        </div>
+    </nav>
+    
+    <div class="content">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flashes">
+                    {% for message in messages %}
+                        <div class="flash">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>SMTPX Secure Email System - © 2024</p>
+    </footer>
+</body>
+</html>
