@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Compose - SMTPX{% endblock %}
+
+{% block content %}
+<div class="compose-container">
+    <h2>Compose Message</h2>
+    
+    <form method="POST" enctype="multipart/form-data" class="compose-form">
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+            {{ form.recipients.label }}
+            {{ form.recipients(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.subject.label }}
+            {{ form.subject(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            {{ form.body.label }}
+            {{ form.body(class="form-control", rows=8) }}
+        </div>
+
+        <div class="form-group">
+            {{ form.attachments.label }}
+            {{ form.attachments(class="form-control") }}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-send">Send</button>
+            <a href="{{ url_for('web.inbox') }}" class="btn-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

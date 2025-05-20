@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Inbox - SMTPX{% endblock %}
+
+{% block content %}
+<div class="inbox-container">
+    <div class="inbox-header">
+        <h2>Inbox</h2>
+        <div class="inbox-stats">
+            <span>{{ emails|length }} messages</span>
+        </div>
+    </div>
+
+    <div class="email-list">
+        {% for email in emails %}
+        <div class="email-item" onclick="location.href='{{ url_for('web.view_email', email_id=email.message_id) }}'">
+            <div class="email-header">
+                <span class="email-sender">{{ email.sender }}</span>
+                <span class="email-time">{{ email.timestamp|datetimeformat }}</span>
+            </div>
+            <div class="email-subject">{{ email.subject }}</div>
+            <div class="email-preview">{{ email.content|truncate(200) }}</div>
+        </div>
+        {% else %}
+        <div class="empty-inbox">
+            <p>No messages in your inbox</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
