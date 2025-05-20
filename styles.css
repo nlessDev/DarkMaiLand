@@ -1,0 +1,92 @@
+/* Base styles */
+:root {
+  --primary: #2c3e50;
+  --secondary: #3498db;
+  --background: #f5f6fa;
+  --text: #2c3e50;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui;
+  margin: 0;
+  padding: 20px;
+  background: var(--background);
+  color: var(--text);
+}
+
+/* Inbox list */
+.inbox-list {
+  display: grid;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.email-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.email-item:hover {
+  transform: translateY(-2px);
+}
+
+.email-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.email-subject {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Compose form */
+.compose-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button {
+  background: var(--secondary);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a1a1a;
+    --text: #ffffff;
+    --primary: #3498db;
+  }
+  
+  .email-item,
+  .compose-form {
+    background: #2c3e50;
+  }
+}
